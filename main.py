@@ -23,12 +23,12 @@ class Root(ctk.CTk):
         self.title("WHC - Working hours calculator")
         self.resizable(False, False)
 
-        self.mode = Switch(master=self, text="Dark Mode", command=Root.mod)
-        self.mode.place(x=290, y=455)
+        self.mode = Switch(master=self, text="Dark Mode", command=Root.mod, font=("Arial", 18, "bold"))
+        self.mode.place(x=280, y=455)
         self.mode.select()
 
         self.submit = Button(master=self, text="Submit", command=Root.sub, corner_radius=15,
-                             width=250, height=40)
+                             width=250, height=40, font=("Arial", 25, "bold"), text_color="white")
         self.submit.place(relx=0.0, rely=1.0, x=10, y=-53)
 
         self.input = Frame(master=self, width=250, height=425, corner_radius=20)
