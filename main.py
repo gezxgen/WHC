@@ -1,8 +1,9 @@
-#import customtkinter as CTk
+import customtkinter as CTk
 
 def main():
-    pass
-
+    print("Hello World!")
+    root = CTk.ctk()
+    root.mainloop()
 
 if __name__ == '__main__':
     main()
