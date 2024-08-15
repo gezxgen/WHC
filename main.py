@@ -1,6 +1,11 @@
 import customtkinter as ctk
 
 
+class Switch(ctk.CTkSwitch):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+
+
 class Button(ctk.CTkButton):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -18,7 +23,11 @@ class Root(ctk.CTk):
         self.title("WHC - Working hours calculator")
         self.resizable(False, False)
 
-        self.submit = Button(self, text="Submit", command=Root.sub, corner_radius=15,
+        self.mode = Switch(master=self, text="Dark Mode", command=Root.mod)
+        self.mode.place(x=290, y=455)
+        self.mode.select()
+
+        self.submit = Button(master=self, text="Submit", command=Root.sub, corner_radius=15,
                              width=250, height=40)
         self.submit.place(relx=0.0, rely=1.0, x=10, y=-53)
 
@@ -30,10 +39,15 @@ class Root(ctk.CTk):
 
     @staticmethod
     def sub():
-        print("was pressed")
+        print("Submit")
+
+    @staticmethod
+    def mod():
+        print("Mode")
 
 
 def main():
+    ctk.set_appearance_mode("dark")
     root = Root()
     root.mainloop()
 
