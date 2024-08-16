@@ -24,6 +24,7 @@ class Frame(ctk.CTkFrame):
 
 class Root(ctk.CTk):
     def __init__(self):
+        # Settings for the root window
         self.textboxes = []
         self.y_distances = [50, 150, 250, 350]
         super().__init__()
@@ -31,20 +32,23 @@ class Root(ctk.CTk):
         self.title("WHC - Working hours calculator")
         self.resizable(False, False)
 
+        # Switch for Dark / Light mode
         self.mode = Switch(master=self, text="Dark Mode", command=Root.mod, font=("Arial", 18, "bold"))
         self.mode.place(x=280, y=455)
         self.mode.select()
 
+        # Settings for submit button
         self.submit = Button(master=self, text="Submit", command=Root.sub, corner_radius=15,
                              width=250, height=40, font=("Arial", 25, "bold"), text_color="white")
         self.submit.place(relx=0.0, rely=1.0, x=10, y=-53)
 
+        # Settings for the frames
         self.input = Frame(master=self, width=250, height=425, corner_radius=20)
         self.input.place(relx=0.0, rely=0.0, x=10, y=10, anchor="nw")
-
         self.output = Frame(master=self, width=170, height=425, corner_radius=20)
         self.output.place(relx=1.0, rely=0.0, x=-10, y=10, anchor="ne")
 
+        # Create output textboxes
         for val in self.y_distances:
             self.textbox = Textbox(master=self.output, height=50, width=100, corner_radius=10,
                                    font=("Arial", 25, "bold"))
@@ -53,6 +57,9 @@ class Root(ctk.CTk):
             self.textbox.insert("0.0", " " + datetime.now().strftime("%H:%M"))
             self.textbox.configure(state="disabled")
             self.textboxes.append(self.textbox)
+
+        # Add titles to textboxes
+        pass
 
     @staticmethod
     def sub():
