@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from datetime import datetime
 
 
 class Textbox(ctk.CTkTextbox):
@@ -42,9 +43,12 @@ class Root(ctk.CTk):
         self.output = Frame(master=self, width=170, height=425, corner_radius=20)
         self.output.place(relx=1.0, rely=0.0, x=-10, y=10, anchor="ne")
 
-        self.textbox = Textbox(master=self.output, height=50, width=100, fg_color="red", corner_radius=10)
-        self.textbox.place(relx=0.0, rely=0.0, x=10, y=10)
+        self.textbox = Textbox(master=self.output, height=50, width=100, corner_radius=10, font=("Arial", 25, "bold"))
+        self.textbox.place(anchor="n", x=85, y=50)
+        self.textbox.delete("0.0", "end")
+        self.textbox.insert("0.0", " " + datetime.now().strftime("%H:%M"))
         self.textbox.configure(state="disabled")
+
 
     @staticmethod
     def sub():
