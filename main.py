@@ -2,6 +2,10 @@ import customtkinter as ctk
 from datetime import datetime
 
 
+class Label(ctk.CTkLabel):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+
 class Textbox(ctk.CTkTextbox):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -25,6 +29,8 @@ class Frame(ctk.CTkFrame):
 class Root(ctk.CTk):
     def __init__(self):
         # Settings for the root window
+        self.labels = []
+        self.titles = ["Time entry", "Time now", "Time 8:24", "Time 9:00"]
         self.textboxes = []
         self.y_distances = [50, 150, 250, 350]
         super().__init__()
@@ -48,8 +54,9 @@ class Root(ctk.CTk):
         self.output = Frame(master=self, width=170, height=425, corner_radius=20)
         self.output.place(relx=1.0, rely=0.0, x=-10, y=10, anchor="ne")
 
-        # Create output textboxes
-        for val in self.y_distances:
+        # Add output textboxes and labels
+        for i, val in enumerate(self.y_distances):
+            # Create output textboxes
             self.textbox = Textbox(master=self.output, height=50, width=100, corner_radius=10,
                                    font=("Arial", 25, "bold"))
             self.textbox.place(anchor="n", x=85, y=val)
@@ -58,8 +65,10 @@ class Root(ctk.CTk):
             self.textbox.configure(state="disabled")
             self.textboxes.append(self.textbox)
 
-        # Add titles to textboxes
-        pass
+            # Add titles to textboxes
+            self.label = Label(master=self.output, text=self.titles[i], font=("Arial", 18, "bold"))
+            self.label.place(anchor="n", x=85, y=val-30)
+            self.labels.append(self.label)
 
     @staticmethod
     def sub():
