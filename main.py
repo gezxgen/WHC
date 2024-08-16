@@ -45,13 +45,9 @@ class Root(ctk.CTk):
         self.output = Frame(master=self, width=170, height=425, corner_radius=20)
         self.output.place(relx=1.0, rely=0.0, x=-10, y=10, anchor="ne")
 
-        self.create_textboxes()
-
-
-    def create_textboxes(self) -> None:
         for val in self.y_distances:
             self.textbox = Textbox(master=self.output, height=50, width=100, corner_radius=10,
-                                         font=("Arial", 25, "bold"))
+                                   font=("Arial", 25, "bold"))
             self.textbox.place(anchor="n", x=85, y=val)
             self.textbox.delete("0.0", "end")
             self.textbox.insert("0.0", " " + datetime.now().strftime("%H:%M"))
