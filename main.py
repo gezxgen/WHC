@@ -24,6 +24,7 @@ class Frame(ctk.CTkFrame):
 
 class Root(ctk.CTk):
     def __init__(self):
+        self.y_distances = [50, 150, 250, 350]
         super().__init__()
         self.geometry("450x500+2000+300")
         self.title("WHC - Working hours calculator")
@@ -43,12 +44,34 @@ class Root(ctk.CTk):
         self.output = Frame(master=self, width=170, height=425, corner_radius=20)
         self.output.place(relx=1.0, rely=0.0, x=-10, y=10, anchor="ne")
 
-        self.textbox = Textbox(master=self.output, height=50, width=100, corner_radius=10, font=("Arial", 25, "bold"))
-        self.textbox.place(anchor="n", x=85, y=50)
-        self.textbox.delete("0.0", "end")
-        self.textbox.insert("0.0", " " + datetime.now().strftime("%H:%M"))
-        self.textbox.configure(state="disabled")
+        self.create_textboxes()
+        
+        self.textbox_entry = Textbox(master=self.output, height=50, width=100, corner_radius=10, font=("Arial", 25, "bold"))
+        self.textbox_entry.place(anchor="n", x=85, y=50)
+        self.textbox_entry.delete("0.0", "end")
+        self.textbox_entry.insert("0.0", " " + datetime.now().strftime("%H:%M"))
+        self.textbox_entry.configure(state="disabled")
 
+        self.textbox_now = Textbox(master=self.output, height=50, width=100, corner_radius=10, font=("Arial", 25, "bold"))
+        self.textbox_now.place(anchor="n", x=85, y=150)
+        self.textbox_now.delete("0.0", "end")
+        self.textbox_now.insert("0.0", " " + datetime.now().strftime("%H:%M"))
+        self.textbox_now.configure(state="disabled")
+
+        self.textbox_even = Textbox(master=self.output, height=50, width=100, corner_radius=10, font=("Arial", 25, "bold"))
+        self.textbox_even.place(anchor="n", x=85, y=250)
+        self.textbox_even.delete("0.0", "end")
+        self.textbox_even.insert("0.0", " " + datetime.now().strftime("%H:%M"))
+        self.textbox_even.configure(state="disabled")
+
+        self.textbox_max = Textbox(master=self.output, height=50, width=100, corner_radius=10,font=("Arial", 25, "bold"))
+        self.textbox_max.place(anchor="n", x=85, y=350)
+        self.textbox_max.delete("0.0", "end")
+        self.textbox_max.insert("0.0", " " + datetime.now().strftime("%H:%M"))
+        self.textbox_max.configure(state="disabled")
+
+    def create_textboxes(self):
+        pass
 
     @staticmethod
     def sub():
