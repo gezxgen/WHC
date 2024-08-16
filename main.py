@@ -1,6 +1,11 @@
 import customtkinter as ctk
 
 
+class Textbox(ctk.CTkTextbox):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+
+
 class Switch(ctk.CTkSwitch):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -37,13 +42,17 @@ class Root(ctk.CTk):
         self.output = Frame(master=self, width=170, height=425, corner_radius=20)
         self.output.place(relx=1.0, rely=0.0, x=-10, y=10, anchor="ne")
 
+        self.textbox = Textbox(master=self.output, height=50, width=100, fg_color="red", corner_radius=10)
+        self.textbox.place(relx=0.0, rely=0.0, x=10, y=10)
+        self.textbox.configure(state="disabled")
+
     @staticmethod
     def sub():
         print("Submit")
 
     @staticmethod
     def mod():
-        print("Mode")
+        ctk.set_appearance_mode("dark" if ctk.get_appearance_mode().lower() == "light" else "light")
 
 
 def main():
