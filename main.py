@@ -94,17 +94,36 @@ class Root(ctk.CTk):
                                                      variable=self.values[i + 14], font=("Arial", 18, "bold"))
                 self.option_menu.place(x=self.x, y=self.y)
 
-            # labels
+            # labels of the breaks
             self.x = 30 if i == 1 or i == 6 else 70
             self.y = 50 if i == 1 else 50 + 60 * (i - 1)
             self.label = ctk.CTkLabel(master=self.input, text=self.titles[i+3], font=("Arial", 15, "bold"))
             self.label.place(anchor="n", x=self.x, y=self.y-30)
             self.labels.append(self.label)
 
+    # Function that calculates the minutes of all the breakes
+    def get_breakes(self) -> int:
+        breaktimes: int = 0
+        for i in range(4):
+            if self.values[i+20].get() == "1":
+                breaktimes += 60 * (int(self.values[i+12].get()) - int(self.values[i+1].get()))
+                breaktimes += int(self.values[i+16].get()) - int(self.values[i+7].get())
+        return breaktimes
+
+    # Function that calculates the times after submission
     def sub(self):
+        """
+        Values:
+        0-5 = hours left
+        6-11 = minutes left
+        12-15 = hours right
+        16-19 = minutes right
+        20-23 = breaks 1-4
+        :return:
+        """
         print("Submit")
-        for i in range(len(self.values)):
-            print(int(self.values[i].get()))
+        breakes: int = self.get_breakes()
+        print(breakes)
         print("Submit")
 
     @staticmethod
