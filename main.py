@@ -44,7 +44,7 @@ class Root(ctk.CTk):
                                    font=("Arial", 25, "bold"))
             self.textbox.place(anchor="n", x=85, y=val)
             self.textbox.delete("0.0", "end")
-            self.textbox.insert("0.0", " " + datetime.now().strftime("%H:%M"))
+            self.textbox.insert("0.0", " 00:00")
             self.textbox.configure(state="disabled")
             self.textboxes.append(self.textbox)
 
@@ -101,6 +101,12 @@ class Root(ctk.CTk):
             self.label.place(anchor="n", x=self.x, y=self.y-30)
             self.labels.append(self.label)
 
+    # Funciton that calculates all the time worked
+    def get_time(self) -> int:
+        time_start = 60 * int(self.values[0].get()) + int(self.values[6].get())
+        time_end = 60 * int(self.values[5].get()) + int(self.values[11].get())
+        return time_end - time_start - self.get_breakes()
+
     # Function that calculates the minutes of all the breakes
     def get_breakes(self) -> int:
         breaktimes: int = 0
@@ -112,18 +118,11 @@ class Root(ctk.CTk):
 
     # Function that calculates the times after submission
     def sub(self):
-        """
-        Values:
-        0-5 = hours left
-        6-11 = minutes left
-        12-15 = hours right
-        16-19 = minutes right
-        20-23 = breaks 1-4
-        :return:
-        """
         print("Submit")
-        breakes: int = self.get_breakes()
-        print(breakes)
+        working_time: int = self.get_time()
+        #self.textboxes
+        #datetime.now().strftime("%H:%M")
+        print(working_time)
         print("Submit")
 
     @staticmethod
