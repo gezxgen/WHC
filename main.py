@@ -11,6 +11,7 @@ class Root(ctk.CTk):
         self.resizable(False, False)
         self.x = 0
         self.y = 0
+        self.checkboxes = []
         self.labels = []
         self.titles = ["Time entry", "Time now", "Time 8:24", "Time 9:00",
                        "Start", "1. break", "2. break", "3. break", "4. break", "End"]
@@ -18,7 +19,7 @@ class Root(ctk.CTk):
         self.y_distances = [50, 150, 250, 350]
         self.hours = [str(i).zfill(2) for i in range(24)]
         self.minutes = [str(i).zfill(2) for i in range(60)]
-        self.values = [ctk.StringVar(value="00") for _ in range(20)]
+        self.values = [ctk.StringVar(value="00") for _ in range(24)]
 
         # Switch for Dark / Light mode
         self.mode = ctk.CTkSwitch(master=self, text="Dark Mode", command=Root.mod, font=("Arial", 18, "bold"))
@@ -70,12 +71,16 @@ class Root(ctk.CTk):
 
 
             # checkboxes for breaks
-
+            if i != 1 and i != 6:
+                self.checkbox = ctk.CTkCheckBox(master=self.input, checkbox_height=18, checkbox_width=18,
+                                                text="", variable=self.values[i+18])
+                self.checkbox.place(x=15, y=self.y-28)
+                self.checkboxes.append(self.checkbox)
 
             # labels
             self.x = 30 if i == 1 or i == 6 else 70
             self.label = ctk.CTkLabel(master=self.input, text=self.titles[i+3], font=("Arial", 15, "bold"))
-            self.label.place(anchor="n", x=self.x, y=self.y - 30)
+            self.label.place(anchor="n", x=self.x, y=self.y-30)
             self.labels.append(self.label)
 
     def sub(self):
