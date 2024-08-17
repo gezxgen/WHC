@@ -6,7 +6,7 @@ class Root(ctk.CTk):
     def __init__(self):
         # Settings for the root window
         super().__init__()
-        self.geometry("450x500+2000+300")
+        self.geometry("460x500+2000+300")
         self.title("WHC - Working hours calculator")
         self.resizable(False, False)
         self.x = 0
@@ -23,16 +23,16 @@ class Root(ctk.CTk):
 
         # Switch for Dark / Light mode
         self.mode = ctk.CTkSwitch(master=self, text="Dark Mode", command=Root.mod, font=("Arial", 18, "bold"))
-        self.mode.place(x=280, y=455)
+        self.mode.place(x=290, y=455)
         self.mode.select()
 
         # Settings for submit button
         self.submit = ctk.CTkButton(master=self, text="Submit", command=self.sub, corner_radius=15,
-                             width=250, height=40, font=("Arial", 25, "bold"), text_color="white")
+                             width=260, height=40, font=("Arial", 25, "bold"), text_color="white")
         self.submit.place(relx=0.0, rely=1.0, x=10, y=-53)
 
         # Settings for the frames
-        self.input = ctk.CTkFrame(master=self, width=250, height=425, corner_radius=20)
+        self.input = ctk.CTkFrame(master=self, width=260, height=425, corner_radius=20)
         self.input.place(relx=0.0, rely=0.0, x=10, y=10, anchor="nw")
         self.output = ctk.CTkFrame(master=self, width=170, height=425, corner_radius=20)
         self.output.place(relx=1.0, rely=0.0, x=-10, y=10, anchor="ne")
@@ -68,12 +68,6 @@ class Root(ctk.CTk):
                                                  variable=self.values[i + 5], font=("Arial", 18, "bold"))
             self.option_menu.place(x=self.x, y=self.y)
 
-            # menus for hours right
-
-
-            # menus for minutes right
-
-
             # checkboxes for breaks
             if i != 1 and i != 6:
                 self.checkbox = ctk.CTkCheckBox(master=self.input, checkbox_height=18, checkbox_width=18,
@@ -81,8 +75,28 @@ class Root(ctk.CTk):
                 self.checkbox.place(x=15, y=self.y-28)
                 self.checkboxes.append(self.checkbox)
 
+                # Hyphens between breaks
+                self.x = 130
+                self.y = 50 if i == 1 else 50 + 60 * (i - 1)
+                self.label = ctk.CTkLabel(master=self.input, text="-", font=("Arial", 20, "bold"))
+                self.label.place(anchor="n", x=self.x, y=self.y - 3)
+                self.labels.append(self.label)
+
+                # menus for hours right
+                self.x = 136
+                self.option_menu = ctk.CTkOptionMenu(master=self.input, anchor="n", height=25, width=45, values=self.hours,
+                                                     variable=self.values[i + 10], font=("Arial", 18, "bold"))
+                self.option_menu.place(x=self.x, y=self.y)
+
+                # menus for minutes right
+                self.x = 195
+                self.option_menu = ctk.CTkOptionMenu(master=self.input, anchor="n", height=25, width=45, values=self.minutes,
+                                                     variable=self.values[i + 14], font=("Arial", 18, "bold"))
+                self.option_menu.place(x=self.x, y=self.y)
+
             # labels
             self.x = 30 if i == 1 or i == 6 else 70
+            self.y = 50 if i == 1 else 50 + 60 * (i - 1)
             self.label = ctk.CTkLabel(master=self.input, text=self.titles[i+3], font=("Arial", 15, "bold"))
             self.label.place(anchor="n", x=self.x, y=self.y-30)
             self.labels.append(self.label)
