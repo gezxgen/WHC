@@ -2,30 +2,6 @@ import customtkinter as ctk
 from datetime import datetime
 
 
-class Label(ctk.CTkLabel):
-    def __init__(self, master, **kwargs):
-        super().__init__(master, **kwargs)
-
-class Textbox(ctk.CTkTextbox):
-    def __init__(self, master, **kwargs):
-        super().__init__(master, **kwargs)
-
-
-class Switch(ctk.CTkSwitch):
-    def __init__(self, master, **kwargs):
-        super().__init__(master, **kwargs)
-
-
-class Button(ctk.CTkButton):
-    def __init__(self, master, **kwargs):
-        super().__init__(master, **kwargs)
-
-
-class Frame(ctk.CTkFrame):
-    def __init__(self, master, **kwargs):
-        super().__init__(master, **kwargs)
-
-
 class Root(ctk.CTk):
     def __init__(self):
         # Settings for the root window
@@ -39,25 +15,25 @@ class Root(ctk.CTk):
         self.resizable(False, False)
 
         # Switch for Dark / Light mode
-        self.mode = Switch(master=self, text="Dark Mode", command=Root.mod, font=("Arial", 18, "bold"))
+        self.mode = ctk.CTkSwitch(master=self, text="Dark Mode", command=Root.mod, font=("Arial", 18, "bold"))
         self.mode.place(x=280, y=455)
         self.mode.select()
 
         # Settings for submit button
-        self.submit = Button(master=self, text="Submit", command=Root.sub, corner_radius=15,
+        self.submit = ctk.CTkButton(master=self, text="Submit", command=Root.sub, corner_radius=15,
                              width=250, height=40, font=("Arial", 25, "bold"), text_color="white")
         self.submit.place(relx=0.0, rely=1.0, x=10, y=-53)
 
         # Settings for the frames
-        self.input = Frame(master=self, width=250, height=425, corner_radius=20)
+        self.input = ctk.CTkFrame(master=self, width=250, height=425, corner_radius=20)
         self.input.place(relx=0.0, rely=0.0, x=10, y=10, anchor="nw")
-        self.output = Frame(master=self, width=170, height=425, corner_radius=20)
+        self.output = ctk.CTkFrame(master=self, width=170, height=425, corner_radius=20)
         self.output.place(relx=1.0, rely=0.0, x=-10, y=10, anchor="ne")
 
         # Add output textboxes and labels
         for i, val in enumerate(self.y_distances):
             # Create output textboxes
-            self.textbox = Textbox(master=self.output, height=50, width=100, corner_radius=10,
+            self.textbox = ctk.CTkTextbox(master=self.output, height=50, width=100, corner_radius=10,
                                    font=("Arial", 25, "bold"))
             self.textbox.place(anchor="n", x=85, y=val)
             self.textbox.delete("0.0", "end")
@@ -66,7 +42,7 @@ class Root(ctk.CTk):
             self.textboxes.append(self.textbox)
 
             # Add titles to textboxes
-            self.label = Label(master=self.output, text=self.titles[i], font=("Arial", 18, "bold"))
+            self.label = ctk.CTkLabel(master=self.output, text=self.titles[i], font=("Arial", 18, "bold"))
             self.label.place(anchor="n", x=85, y=val-30)
             self.labels.append(self.label)
 
