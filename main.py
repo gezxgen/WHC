@@ -108,13 +108,22 @@ class Root(ctk.CTk):
             self.labels.append(self.label)
 
     # Funciton that calculates all the time worked
-    def get_time(self, time_end: str = "") -> int:
+    def get_time(self) -> list[int]:
+        times: list[int] = [0 for _ in range(4)]
+        breakes: int = self.get_breakes()
+        now: str = datetime.now().strftime("%H:%M")
+
+        # calculation
         time_start = 60 * int(self.values[0].get()) + int(self.values[6].get())
-        if time_end:
-            time_end = 60 * int(time_end.split(":")[0]) + int(time_end.split(":")[1])
-        else:
-            time_end = 60 * int(self.values[5].get()) + int(self.values[11].get())
-        return time_end - time_start - self.get_breakes()
+        time_end = 60 * int(now.split(":")[0]) + int(now.split(":")[1])
+
+        # saving the results
+        times[1] = time_end - time_start - breakes
+        times[0] = 60 * int(self.values[5].get()) + int(self.values[11].get())
+        # 8:24 - Zeit jz, das bei Arbeitsende hinzufügen (9h das Gleiche)
+        times[2] = 504 + time_start + breakes
+        times[3] = 540 + time_start + breakes
+        return times
 
     # Function that calculates the minutes of all the breakes
     def get_breakes(self) -> int:
@@ -127,14 +136,16 @@ class Root(ctk.CTk):
 
     # Function that calculates the times after submission
     def sub(self):
-        print("Submit")
-        working_time_input: int = self.get_time()
-        working_time_now = self.get_time(datetime.now().strftime("%H:%M"))
-        print(type(datetime.now().strftime("%H:%M")))
-        #self.textboxes
-        print(working_time_input)
-        print(working_time_now)
-        print("Submit")
+        times: list[int] = []
+        times = self.get_time()
+
+        for i in range(4):
+            self.textboxes[i].configure(state="normal")
+
+        print(times)
+
+        for i in range(4):
+            self.textboxes[i].configure(state="disabled")
 
     # Function to set the default value for the user
     def default(self):
