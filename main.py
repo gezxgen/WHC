@@ -5,14 +5,20 @@ from datetime import datetime
 class Root(ctk.CTk):
     def __init__(self):
         # Settings for the root window
-        self.labels = []
-        self.titles = ["Time entry", "Time now", "Time 8:24", "Time 9:00"]
-        self.textboxes = []
-        self.y_distances = [50, 150, 250, 350]
         super().__init__()
         self.geometry("450x500+2000+300")
         self.title("WHC - Working hours calculator")
         self.resizable(False, False)
+        self.x = 0
+        self.y = 0
+        self.labels = []
+        self.titles = ["Time entry", "Time now", "Time 8:24", "Time 9:00",
+                       "Start", "1. break", "2. break", "3. break", "4. break", "End"]
+        self.textboxes = []
+        self.y_distances = [50, 150, 250, 350]
+        self.hours = [str(i).zfill(2) for i in range(24)]
+        self.minutes = [str(i).zfill(2) for i in range(60)]
+        self.values = [ctk.StringVar(value="00") for _ in range(20)]
 
         # Switch for Dark / Light mode
         self.mode = ctk.CTkSwitch(master=self, text="Dark Mode", command=Root.mod, font=("Arial", 18, "bold"))
@@ -20,7 +26,7 @@ class Root(ctk.CTk):
         self.mode.select()
 
         # Settings for submit button
-        self.submit = ctk.CTkButton(master=self, text="Submit", command=Root.sub, corner_radius=15,
+        self.submit = ctk.CTkButton(master=self, text="Submit", command=self.sub, corner_radius=15,
                              width=250, height=40, font=("Arial", 25, "bold"), text_color="white")
         self.submit.place(relx=0.0, rely=1.0, x=10, y=-53)
 
@@ -46,9 +52,37 @@ class Root(ctk.CTk):
             self.label.place(anchor="n", x=85, y=val-30)
             self.labels.append(self.label)
 
-    @staticmethod
-    def sub():
+        # Add drop-down menus
+        for i in range(1, 7):
+            # menus for hours left
+            self.y = 50 if i == 1 else 50+60*(i-1)
+            self.option_menu = ctk.CTkOptionMenu(master=self.input, anchor="n", height=25, width=45, values=self.hours,
+                                                 variable=self.values[1], font=("Arial", 18, "bold"))
+            self.option_menu.place(x=10, y=self.y)
+
+            # menus for minutes left
+
+
+            # menus for hours right
+
+
+            # menus for minutes right
+
+
+            # checkboxes for breaks
+
+
+            # labels
+            self.x = 30 if i == 1 or i == 6 else 70
+            self.label = ctk.CTkLabel(master=self.input, text=self.titles[i+3], font=("Arial", 15, "bold"))
+            self.label.place(anchor="n", x=self.x, y=self.y - 30)
+            self.labels.append(self.label)
+
+    def sub(self):
         print("Submit")
+        print(len(self.values))
+        value = int(self.values[0].get())
+        print(value)
 
     @staticmethod
     def mod():
