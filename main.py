@@ -11,11 +11,13 @@ class Root(ctk.CTk):
         self.resizable(False, False)
         self.x = 0
         self.y = 0
-        self.checkboxes = []
+        self.menus = ["_" for _ in range(21)]
         self.labels = []
         self.titles = ["Time entry", "Time now", "Time 8:24", "Time 9:00",
                        "Start", "1. break", "2. break", "3. break", "4. break", "End"]
         self.textboxes = []
+        self.options = []
+        self.checkboxes = []
         self.y_distances = [50, 150, 250, 350]
         self.hours = [str(i).zfill(2) for i in range(24)]
         self.minutes = [str(i).zfill(2) for i in range(60)]
@@ -61,12 +63,14 @@ class Root(ctk.CTk):
             self.option_menu = ctk.CTkOptionMenu(master=self.input, anchor="n", height=25, width=45, values=self.hours,
                                                  variable=self.values[i-1], font=("Arial", 18, "bold"))
             self.option_menu.place(x=self.x, y=self.y)
+            self.menus[i - 1] = self.option_menu
 
             # menus for minutes left
             self.x = 70
             self.option_menu = ctk.CTkOptionMenu(master=self.input, anchor="n", height=25, width=45, values=self.minutes,
                                                  variable=self.values[i + 5], font=("Arial", 18, "bold"))
             self.option_menu.place(x=self.x, y=self.y)
+            self.menus[i + 5] = self.option_menu
 
             # checkboxes for breaks
             if i != 1 and i != 6:
@@ -87,12 +91,14 @@ class Root(ctk.CTk):
                 self.option_menu = ctk.CTkOptionMenu(master=self.input, anchor="n", height=25, width=45, values=self.hours,
                                                      variable=self.values[i + 10], font=("Arial", 18, "bold"))
                 self.option_menu.place(x=self.x, y=self.y)
+                self.menus[i + 10] = self.option_menu
 
                 # menus for minutes right
                 self.x = 195
                 self.option_menu = ctk.CTkOptionMenu(master=self.input, anchor="n", height=25, width=45, values=self.minutes,
                                                      variable=self.values[i + 14], font=("Arial", 18, "bold"))
                 self.option_menu.place(x=self.x, y=self.y)
+                self.menus[i + 14] = self.option_menu
 
             # labels of the breaks
             self.x = 30 if i == 1 or i == 6 else 70
@@ -102,9 +108,12 @@ class Root(ctk.CTk):
             self.labels.append(self.label)
 
     # Funciton that calculates all the time worked
-    def get_time(self) -> int:
+    def get_time(self, time_end: str = "") -> int:
         time_start = 60 * int(self.values[0].get()) + int(self.values[6].get())
-        time_end = 60 * int(self.values[5].get()) + int(self.values[11].get())
+        if time_end:
+            time_end = 60 * int(time_end.split(":")[0]) + int(time_end.split(":")[1])
+        else:
+            time_end = 60 * int(self.values[5].get()) + int(self.values[11].get())
         return time_end - time_start - self.get_breakes()
 
     # Function that calculates the minutes of all the breakes
@@ -119,11 +128,29 @@ class Root(ctk.CTk):
     # Function that calculates the times after submission
     def sub(self):
         print("Submit")
-        working_time: int = self.get_time()
+        working_time_input: int = self.get_time()
+        working_time_now = self.get_time(datetime.now().strftime("%H:%M"))
+        print(type(datetime.now().strftime("%H:%M")))
         #self.textboxes
-        #datetime.now().strftime("%H:%M")
-        print(working_time)
+        print(working_time_input)
+        print(working_time_now)
         print("Submit")
+
+    # Function to set the default value for the user
+    def default(self):
+        # Set the correct times
+        self.menus[0].set("07")
+        self.menus[1].set("09")
+        self.menus[2].set("12")
+        self.menus[5].set("17")
+        self.menus[12].set("09")
+        self.menus[13].set("12")
+        self.menus[16].set("15")
+        self.menus[17].set("45")
+
+        # enable breakes 1 & 2
+        self.checkboxes[0].select()
+        self.checkboxes[1].select()
 
     @staticmethod
     def mod():
@@ -133,6 +160,8 @@ class Root(ctk.CTk):
 def main():
     ctk.set_appearance_mode("dark")
     root = Root()
+    root.default()
+    root.sub()
     root.mainloop()
 
 
