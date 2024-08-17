@@ -56,13 +56,17 @@ class Root(ctk.CTk):
         # Add drop-down menus
         for i in range(1, 7):
             # menus for hours left
+            self.x = 10
             self.y = 50 if i == 1 else 50+60*(i-1)
             self.option_menu = ctk.CTkOptionMenu(master=self.input, anchor="n", height=25, width=45, values=self.hours,
                                                  variable=self.values[i-1], font=("Arial", 18, "bold"))
-            self.option_menu.place(x=10, y=self.y)
+            self.option_menu.place(x=self.x, y=self.y)
 
             # menus for minutes left
-
+            self.x = 70
+            self.option_menu = ctk.CTkOptionMenu(master=self.input, anchor="n", height=25, width=45, values=self.minutes,
+                                                 variable=self.values[i + 5], font=("Arial", 18, "bold"))
+            self.option_menu.place(x=self.x, y=self.y)
 
             # menus for hours right
 
