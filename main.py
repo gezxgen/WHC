@@ -57,7 +57,7 @@ class Root(ctk.CTk):
             # menus for hours left
             self.y = 50 if i == 1 else 50+60*(i-1)
             self.option_menu = ctk.CTkOptionMenu(master=self.input, anchor="n", height=25, width=45, values=self.hours,
-                                                 variable=self.values[1], font=("Arial", 18, "bold"))
+                                                 variable=self.values[i-1], font=("Arial", 18, "bold"))
             self.option_menu.place(x=10, y=self.y)
 
             # menus for minutes left
@@ -80,9 +80,9 @@ class Root(ctk.CTk):
 
     def sub(self):
         print("Submit")
-        print(len(self.values))
-        value = int(self.values[0].get())
-        print(value)
+        for i in range(len(self.values)):
+            print(int(self.values[i].get()))
+        print("Submit")
 
     @staticmethod
     def mod():
