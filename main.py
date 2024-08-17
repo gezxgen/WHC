@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 class Root(ctk.CTk):
-    def __init__(self):
+    def __init__(self) -> None:
         # Settings for the root window
         super().__init__()
         self.geometry("460x500+2000+300")
@@ -107,6 +107,13 @@ class Root(ctk.CTk):
             self.label.place(anchor="n", x=self.x, y=self.y-30)
             self.labels.append(self.label)
 
+    # Functin to reformat the numbers to strings
+    def convert_times(self, times: list[int]) -> list[str]:
+        times_str: list[str] = ["" for _ in range(4)]
+        for i in range(4):
+            times_str[i] = str(times[i] // 60).zfill(2) + ":" + str(times[i] % 60).zfill(2)
+        return times_str
+
     # Funciton that calculates all the time worked
     def get_time(self) -> list[int]:
         times: list[int] = [0 for _ in range(4)]
@@ -115,12 +122,12 @@ class Root(ctk.CTk):
 
         # calculation
         time_start = 60 * int(self.values[0].get()) + int(self.values[6].get())
-        time_end = 60 * int(now.split(":")[0]) + int(now.split(":")[1])
+        time_end_now = 60 * int(now.split(":")[0]) + int(now.split(":")[1])
+        time_end_normal = 60 * int(self.values[5].get()) + int(self.values[11].get())
 
         # saving the results
-        times[1] = time_end - time_start - breakes
-        times[0] = 60 * int(self.values[5].get()) + int(self.values[11].get())
-        # 8:24 - Zeit jz, das bei Arbeitsende hinzufügen (9h das Gleiche)
+        times[0] = time_end_normal - time_start - breakes
+        times[1] = time_end_now - time_start - breakes
         times[2] = 504 + time_start + breakes
         times[3] = 540 + time_start + breakes
         return times
@@ -136,13 +143,15 @@ class Root(ctk.CTk):
 
     # Function that calculates the times after submission
     def sub(self):
-        times: list[int] = []
-        times = self.get_time()
+        times: list[str] = []
+        times = self.convert_times(self.get_time())
 
         for i in range(4):
             self.textboxes[i].configure(state="normal")
 
-        print(times)
+        for i in range(4):
+            self.textboxes[i].delete("0.0", "end")
+            self.textboxes[i].insert("0.0", times[i])
 
         for i in range(4):
             self.textboxes[i].configure(state="disabled")
