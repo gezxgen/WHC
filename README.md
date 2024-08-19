@@ -4,28 +4,27 @@
 
 ## Overview
 
-> The **WHC (Working Hours Calculator)** is a desktop application built using the `customtkinter` library. It allows users to input and calculate their working hours, including breaks. The app features a graphical user interface (GUI) for ease of use and toggles between Dark and Light modes.
+The **WHC (Working Hours Calculator)** is a desktop application built using the `customtkinter` library. It allows users to input and calculate their working hours, including breaks. The app features a graphical user interface (GUI) for ease of use and toggles between Dark and Light modes.
 
 ---
 
 ## Features
 
-> - **Responsive GUI**: The application uses the `customtkinter` library to create a sleek and modern user interface.
-> - **Time Entry**: Users can enter times such as start, breaks, and end times of their working day.
-> - **Dark Mode Toggle**: A switch is provided to toggle between Dark Mode and Light Mode.
-> - **Submit Button**: The `Submit` button processes the data and performs the calculation for working hours.
+- **Responsive GUI**: The application uses the `customtkinter` library to create a sleek and modern user interface.
+- **Time Entry**: Users can enter times such as start, breaks, and end times of their working day.
+- **Dark Mode Toggle**: A switch is provided to toggle between Dark Mode and Light Mode.
+- **Submit Button**: The `Submit` button processes the data and performs the calculation for working hours.
 
 ---
 
 ## Components
-
-> The main window (`Root`) serves as the base for the application:
-> - **Size**: 460x500 pixels.
-> - **Title**: WHC - Working hours calculator.
-> - **Widgets**: 
->   - Labels and textboxes for time input.
->   - Switch for toggling between Dark Mode and Light Mode.
->   - Submit button for processing the time entries.
+The main window (`Root`) serves as the base for the application:
+- **Size**: 460x500 pixels.
+- **Title**: WHC - Working hours calculator.
+- **Widgets**: 
+  - Labels and textboxes for time input.
+  - Switch for toggling between Dark Mode and Light Mode.
+  - Submit button for processing the time entries.
 
 ```python
 class Root(ctk.CTk):
@@ -137,26 +136,28 @@ class Root(ctk.CTk):
 ---
 
 ## Usage Instructions
-> - **Launch the Application**: Start the program to open the main window.
-> - **Enter Time Data**: Use the provided textboxes to input your work times, including start, breaks, and end times.
-> - **Toggle Dark Mode**: Switch between dark and light modes using the toggle switch in the bottom-right corner.
-> - **Submit the Data**: Once all the data is entered, click on the Submit button to calculate your working hours.
+- **Launch the Application**: Start the program to open the main window.
+- **Enter Time Data**: Use the provided textboxes to input your work times, including start, breaks, and end times.
+- **Toggle Dark Mode**: Switch between dark and light modes using the toggle switch in the bottom-right corner.
+- **Submit the Data**: Once all the data is entered, click on the Submit button to calculate your working hours.
 
 ---
 
-## Screenshots
-> Below are some example screenshots of the application in action: 
-
+## Screenshots <br />
+Below are some example screenshots of the application in action: 
+![Alt text](dark.png "a title")
+![Alt text](light.png "a title")
+![Alt text](optionmenu.png "a title")
 ---
 
 ## Future Improvements
-> **Potential improvements could include**:
-> 
-> - Adding data validation for time entries.
-> - Expanding the app's functionality to calculate overtime or track daily work > summaries.
-> - Adding a database to store and retrieve historical time entries.
+**Potential improvements could include**:
+ 
+- Adding data validation for time entries.
+- Expanding the app's functionality to calculate overtime or track daily work > summaries.
+- Adding a database to store and retrieve historical time entries.
 
 ---
 
 ## Conclusion
-> The **WHC - Working Hours Calculator** is a helpful tool for professionals looking to track their working hours easily. Its simple yet functional design makes it user-friendly, while the mode switch adds a touch of customization.
+The **WHC - Working Hours Calculator** is a helpful tool for professionals looking to track their working hours easily. Its simple yet functional design makes it user-friendly, while the mode switch adds a touch of customization.
