@@ -151,12 +151,12 @@ class Root(ctk.CTk):
 
 ## Future Improvements
 > **Potential improvements could include**:
-
-- Adding data validation for time entries.
-- Expanding the app's functionality to calculate overtime or track daily work summaries.
-- Adding a database to store and retrieve historical time entries.
+> 
+> - Adding data validation for time entries.
+> - Expanding the app's functionality to calculate overtime or track daily work > summaries.
+> - Adding a database to store and retrieve historical time entries.
 
 ---
 
 ## Conclusion
-The **WHC - Working Hours Calculator** is a helpful tool for professionals looking to track their working hours easily. Its simple yet functional design makes it user-friendly, while the mode switch adds a touch of customization.
+> The **WHC - Working Hours Calculator** is a helpful tool for professionals looking to track their working hours easily. Its simple yet functional design makes it user-friendly, while the mode switch adds a touch of customization.
