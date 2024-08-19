@@ -1,4 +1,4 @@
-# Documentation: WHC - Working Hours Calculator
+# WHC - Working Hours Calculator
 
 ---
 
@@ -143,12 +143,22 @@ class Root(ctk.CTk):
 
 ---
 
-## Screenshots <br />
-Below are some example screenshots of the application in action: 
-![Alt text](dark.png "a title")
-![Alt text](light.png "a title")
-![Alt text](optionmenu.png "a title")
+## Screenshots
+
+Below are some example screenshots of the application in action:
+
+<p float="left">
+  <img src="dark.png" alt="dark mode" width="400" />
+  <img src="light.png" alt="light mode" width="400" />
+</p>
+
+<p>
+  <img src="optionmenu.png" alt="option menu" width="400" />
+</p>
+
 ---
+
+
 
 ## Future Improvements
 **Potential improvements could include**:
@@ -161,3 +171,7 @@ Below are some example screenshots of the application in action:
 
 ## Conclusion
 The **WHC - Working Hours Calculator** is a helpful tool for professionals looking to track their working hours easily. Its simple yet functional design makes it user-friendly, while the mode switch adds a touch of customization.
+<br />
+<br />
+<br />
+<br />
